@@ -2,6 +2,7 @@ package ie.cit.adf.domain;
 
 import java.util.UUID;
 
+// object representation of row
 public class Todo {
 	private String id;
 	private String text;
