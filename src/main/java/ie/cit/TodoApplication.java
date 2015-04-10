@@ -19,8 +19,8 @@ public class TodoApplication {
 		Todo todo2 = new Todo();
 		todo2.setText("Close Windows");
 		todoRepository.insert(todo2);
+		
+		((ClassPathXmlApplicationContext)ctx).close();
 	}
 
-}
-
-////////////
+}	

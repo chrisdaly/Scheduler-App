@@ -7,6 +7,7 @@ public class Todo {
 	private String id;
 	private String text;
 	private boolean done;
+	private String tag;
 
 	public Todo() {
 		this.id = UUID.randomUUID().toString();
@@ -36,9 +37,17 @@ public class Todo {
 		this.done = done;
 	}
 
+	public String getTag() {
+		return tag;
+	}
+
+	public void setTag(String tag) {
+		this.tag = tag;
+	}
+	
 	@Override
 	public String toString() {
-		return "Todo [id=" + id + ", text=" + text + ", done=" + done + "]";
+		return "Todo [id=" + id + ", text=" + text + ", done=" + done + ", tag=" + tag + "]";
 	}
 }
 //////////
