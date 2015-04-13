@@ -9,9 +9,13 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class SchedulerApplication {
 // Bootstrap entry-point into application.
+	
 	public static void main(String[] args) {
+		// Fetch web application context.
+		// Static class to access context.
 		ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext(
 				"beans.xml");
+		// Static class to access context.
 		ShedulerRepository schedulerRepository = ctx.getBean(ShedulerRepository.class);
 
 		// List out all the tasks in the DB.

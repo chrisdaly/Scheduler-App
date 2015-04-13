@@ -23,10 +23,13 @@ public class TimeServlet extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
-		
+		// Fetch web application context.
 		ServletContext servletContext = getServletContext();
+		
+		// Static class to access context.
 		WebApplicationContext ctx = WebApplicationContextUtils
 				.getWebApplicationContext(servletContext);
+		
 		todoRepository = ctx.getBean(ShedulerRepository.class);
 	}
 

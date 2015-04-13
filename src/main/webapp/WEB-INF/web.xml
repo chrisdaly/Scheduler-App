@@ -32,4 +32,5 @@
 		<servlet-name>timeServlet</servlet-name>
 		<url-pattern>/time</url-pattern>
 	</servlet-mapping>
+	
 </web-app>
