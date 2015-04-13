@@ -30,11 +30,11 @@ public class TodoController {
 		return "todo";
 	};
 	
-	@RequestMapping(value = { "all", "/" }, method = RequestMethod.GET, produces = "application/json")
-	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody List<Todo> getAllTodoItems() {
-		return repo.getAll();
-	}
+//	@RequestMapping(value = { "all", "/" }, method = RequestMethod.GET, produces = "application/json")
+//	@ResponseStatus(HttpStatus.OK)
+//	public @ResponseBody List<Todo> getAllTodoItems() {
+//		return repo.getAll();
+//	}
 	
 		
 
