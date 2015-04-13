@@ -2,14 +2,17 @@ package ie.cit.adf.domain;
 
 import java.util.UUID;
 
-// object representation of row
-public class Todo {
+
+public class TaskObject {
+// Object representation (task) of repository table row.
+	
 	private String id;
 	private String text;
 	private boolean done;
 	private String tag;
 
-	public Todo() {
+	public TaskObject() {
+		// Each time a new object is instantiated it will be assigned a unique value.
 		this.id = UUID.randomUUID().toString();
 	}
 
@@ -47,7 +50,7 @@ public class Todo {
 	
 	@Override
 	public String toString() {
-		return "Todo [id=" + id + ", text=" + text + ", done=" + done + ", tag=" + tag + "]";
+		return "Task [id=" + id + ", text=" + text + ", done=" + done + ", tag=" + tag + "]";
 	}
 }
 //////////

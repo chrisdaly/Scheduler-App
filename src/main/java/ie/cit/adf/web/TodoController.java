@@ -2,8 +2,8 @@ package ie.cit.adf.web;
 
 import java.util.List;
 
-import ie.cit.adf.dao.TodoRepository;
-import ie.cit.adf.domain.Todo;
+import ie.cit.adf.dao.ShedulerRepository;
+import ie.cit.adf.domain.TaskObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @Controller
 public class TodoController {
 
-	private TodoRepository repo;
+	private ShedulerRepository repo;
 	
 	@Autowired
-	public TodoController(TodoRepository repo) {
+	public TodoController(ShedulerRepository repo) {
 		this.repo = repo;
 	}
 

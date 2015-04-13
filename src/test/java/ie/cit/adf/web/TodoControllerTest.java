@@ -1,8 +1,8 @@
 package ie.cit.adf.web;
 
 import static org.junit.Assert.*;
-import ie.cit.adf.dao.TodoRepository;
-import ie.cit.adf.domain.Todo;
+import ie.cit.adf.dao.ShedulerRepository;
+import ie.cit.adf.domain.TaskObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,23 +16,23 @@ public class TodoControllerTest {
 	@Test
 	public void testGetAll() {
 		final boolean[] methodInvoked = new boolean[1];
-		TodoRepository repo = new TodoRepository() {
+		ShedulerRepository repo = new ShedulerRepository() {
 
-			public void insert(Todo todo) {
+			public void insert(TaskObject todo) {
 				// TODO Auto-generated method stub
 				
 			}
 			
-			public List<Todo> getAll() {
+			public List<TaskObject> getAll() {
 				// TODO Auto-generated method stub
 				methodInvoked[0] = true;
-				return new ArrayList<Todo>();
+				return new ArrayList<TaskObject>();
 			}
 		};
 		
 		TodoController tested = new TodoController(repo);
 		
-		List<Todo> all = tested.getAllTodoItems();
+		List<TaskObject> all = tested.getAllTodoItems();
 		assertThat(all, notNullValue());
 		assertThat(methodInvoked[0], equalTo(true));
 	}

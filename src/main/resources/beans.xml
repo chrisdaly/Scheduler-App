@@ -8,9 +8,9 @@
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="org.postgresql.Driver" />
 		<property name="url"
-			value="jdbc:postgresql://babar.elephantsql.com:5432/skxemkit"></property>
-		<property name="username" value="skxemkit"></property>
-		<property name="password" value="_uGEy766wEbziWt-_ewC2wQ252sbLvku"></property>
+			value="jdbc:postgresql://horton.elephantsql.com:5432/bixotpkd"></property>
+		<property name="username" value="bixotpkd"></property>
+		<property name="password" value="fEvF1QRHgnl5elM-hz9XnF86YSKApIX7"></property>
 	</bean>
 
 	<context:component-scan base-package="ie.cit.adf.dao" />
