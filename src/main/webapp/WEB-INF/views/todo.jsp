@@ -2,8 +2,8 @@
 
 <html>
 <h1>Scheduler items:</h1>
-<c:forEach items="${todos}" var="todo" varStatus="row">
-${row.index}. ${todo.text} <br />
+<c:forEach items="${todos}" var="task" varStatus="row">
+${row.index}. ${task.text} <br />
 </c:forEach>
 
 </html>

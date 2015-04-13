@@ -15,11 +15,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JdbcSchedulerRepository implements ShedulerRepository {
-// Specific Jdbc implementation of the interface
+// Specific implementation of the interface
 
 	private JdbcTemplate jdbcTemplate;
 
 	@Autowired
+	// Annotate controller to automatically inject datasource.
 	public JdbcSchedulerRepository(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
@@ -56,7 +57,7 @@ class TodoRowMapper implements RowMapper<TaskObject> {
 		boolean done = rs.getBoolean("done");
 		String tag = rs.getString("tag");
 		
-		// Create a new todo object based on the query results.
+		// Create a new task object based on the query results.
 		TaskObject task = new TaskObject();
 		task.setId(id);
 		task.setText(text);

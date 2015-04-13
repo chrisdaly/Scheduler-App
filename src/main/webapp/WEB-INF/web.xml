@@ -13,17 +13,6 @@
 	</listener>
 
 	<servlet>
-		<servlet-name>dispatcher</servlet-name>
-		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-	<servlet-mapping>
-		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/todo/*</url-pattern>
-	</servlet-mapping>
-
-	<servlet>
 		<servlet-name>timeServlet</servlet-name>
 		<servlet-class>ie.cit.adf.web.TimeServlet</servlet-class>
 	</servlet>
@@ -31,6 +20,17 @@
 	<servlet-mapping>
 		<servlet-name>timeServlet</servlet-name>
 		<url-pattern>/time</url-pattern>
+	</servlet-mapping>
+	
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/scheduler/*</url-pattern>
 	</servlet-mapping>
 	
 </web-app>
