@@ -30,7 +30,7 @@ public class TodoControllerTest {
 			}
 		};
 		
-		TodoController tested = new TodoController(repo);
+		SchedulerController tested = new SchedulerController(repo);
 		
 		List<TaskObject> all = tested.getAllTodoItems();
 		assertThat(all, notNullValue());
