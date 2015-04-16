@@ -5,7 +5,7 @@ import ie.cit.adf.domain.TaskObject;
 import java.util.List;
 
 public interface ShedulerRepository {
-	void insert(TaskObject todo);
+	void insert(TaskObject task);
 
 	List<TaskObject> getAll();
 }
