@@ -39,15 +39,17 @@ public class SchedulerController {
 	public String create(@RequestParam String text) {
 		// Automatically takes the parameter from the request and binds it to 
 		// text value.
-		//System.out.println(text);
+		
+		System.out.println(text);
 		
 		TaskObject task = new TaskObject();
 		task.setText(text);
 		repo.insert(task);
 		
-		//System.out.println(task);
+		
+		System.out.println(task);
 
-		return "redirect::todo";
+		return "redirect:all";
 	}
 		
 

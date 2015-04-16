@@ -32,6 +32,7 @@ public class JdbcSchedulerRepository implements ShedulerRepository {
 	}
 	
 	public void delete(TaskObject todo) {
+		// Delets a task object from the repository.
 		jdbcTemplate.update("DELETE FROM schedule WHERE id = (id) values(?)",
 				todo.getId());
 	}
@@ -62,7 +63,7 @@ class TodoRowMapper implements RowMapper<TaskObject> {
 		task.setId(id);
 		task.setText(text);
 		task.setDone(done);
-		task.setText(tag);
+		task.setTag(tag);
 		return task;
 	}
 }
