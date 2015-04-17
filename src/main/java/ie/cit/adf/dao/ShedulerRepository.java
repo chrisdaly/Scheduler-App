@@ -10,4 +10,8 @@ public interface ShedulerRepository {
 	void delete(String id);
 
 	List<TaskObject> getAll();
+
+	TaskObject findById(String id);
+
+	void update(TaskObject task);
 }

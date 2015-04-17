@@ -42,13 +42,18 @@ public class JdbcSchedulerRepository implements ShedulerRepository {
 		jdbcTemplate.update("DELETE FROM schedule WHERE id = ?", id);
 	}
 	
-	
-	public TaskObject findByTag(String tag) {
-		return jdbcTemplate.queryForObject("SELECT id, text, done, tag FROM schedule WHERE tag = ?",
-				new TodoRowMapper(), tag);
+
+	public TaskObject findById(String id) {
+		// Finds a task object by its id.
+		return jdbcTemplate.queryForObject("SELECT id, text, done, tag FROM schedule WHERE id = ?",
+				new TodoRowMapper(), id);
 	}
-
-
+	
+	public void update(TaskObject task) {
+		// Changes the fields of a current task object to latest information.
+		jdbcTemplate.update("UPDATE schedule SET text=?, done=? WHERE id=?",
+				task.getText(), task.isDone(), task.getId());
+	}
 }
 
 class TodoRowMapper implements RowMapper<TaskObject> {

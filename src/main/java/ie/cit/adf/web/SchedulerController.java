@@ -29,17 +29,20 @@ public class SchedulerController {
 //		this.repo = repo;
 //	}
 
+	// @RequestMappign automatically takes the parameter from the request and binds it to 
+	// text value.
+	
+	
 	@RequestMapping("all")
 	public String getAllTodoItems(Model model) {
 		model.addAttribute("todos", repo.getAll());
 		return "todo";
 	};
 	
+
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String create(@RequestParam String text) {
-		// Automatically takes the parameter from the request and binds it to 
-		// text value.
-		
+	// Creates a new task by stripping the fields from URL.
 		System.out.println(text);
 		
 		TaskObject task = new TaskObject();
@@ -53,12 +56,27 @@ public class SchedulerController {
 	
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
 	public String delete(@PathVariable String id) {
+	// Deletes a task by id.
 		System.out.println(id);
 		repo.delete(id);
 		
 		return "redirect:all";
 	}
 		
+	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
+	public String update(@PathVariable String id) {
+	// Changes the status of a task.
+		
+		// Find specific task by id.
+		TaskObject task = repo.findById(id);
+		
+		// Flip the task status.
+		task.setDone(!task.isDone());
+		repo.update(task);
+		
+		return "redirect:all"; 
+	}
+	
 
 
 }
