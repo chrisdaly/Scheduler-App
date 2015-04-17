@@ -7,6 +7,7 @@ import ie.cit.adf.dao.ShedulerRepository;
 import ie.cit.adf.domain.TaskObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -77,6 +78,11 @@ public class SchedulerController {
 		return "redirect:all"; 
 	}
 	
-
+	@RequestMapping(value = "all", produces = "application/json")
+	@ResponseStatus(HttpStatus.OK)
+	public @ResponseBody List<TaskObject> getAllTodoItems() {
+		
+		return repo.getAll();
+	}
 
 }
