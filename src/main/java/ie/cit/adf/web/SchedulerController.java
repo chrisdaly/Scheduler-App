@@ -46,11 +46,19 @@ public class SchedulerController {
 		task.setText(text);
 		repo.insert(task);
 		
-		
 		System.out.println(task);
 
 		return "redirect:all";
 	}
+	
+	@RequestMapping(value = "{id}", method = RequestMethod.DELETE)
+	public String delete(@PathVariable String id) {
+		System.out.println(id);
+		repo.delete(id);
 		
+		return "redirect:all";
+	}
+		
+
 
 }

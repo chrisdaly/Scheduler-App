@@ -8,9 +8,12 @@
 		type="submit" value="Create">
 </form>
 
+<c:forEach items="${todos}" var="todo" varStatus="row">
+	<form method="post" action="${todo.id}">
+		<input name="_method" type="hidden" value="delete"> <input
+			name="delete" type="submit" value="Delete"> ${row.index}.
+		${todo.text} ${todo.done }
+	</form>
 
-<c:forEach items="${todos}" var="task" varStatus="row">
-${row.index} &nbsp; ${task.text} &nbsp; ${task.tag} &nbsp; ${task.done} <br />
 </c:forEach>
-
 </html>

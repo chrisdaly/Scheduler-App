@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ShedulerRepository {
 	void insert(TaskObject task);
+	
+	void delete(String id);
 
 	List<TaskObject> getAll();
 }

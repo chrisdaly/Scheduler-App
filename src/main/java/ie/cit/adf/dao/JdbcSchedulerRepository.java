@@ -25,28 +25,30 @@ public class JdbcSchedulerRepository implements ShedulerRepository {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	public List<TaskObject> getAll() {
+		// Map every row from the retrieved result set into a task object.
+		return jdbcTemplate.query("SELECT id, text, done, tag FROM schedule",
+				new TodoRowMapper());
+	}
+	
 	public void insert(TaskObject task) {
 		// Inserts a task object into the repository.
 		jdbcTemplate.update("INSERT INTO schedule(id, text, done, tag) values(?,?,?,?)",
 				task.getId(), task.getText(), task.isDone(), task.getTag());
 	}
 	
-	public void delete(TaskObject todo) {
-		// Delets a task object from the repository.
-		jdbcTemplate.update("DELETE FROM schedule WHERE id = (id) values(?)",
-				todo.getId());
+	public void delete(String id) {
+		// Deletes a task object from the repository.
+		jdbcTemplate.update("DELETE FROM schedule WHERE id = ?", id);
 	}
+	
 	
 	public TaskObject findByTag(String tag) {
 		return jdbcTemplate.queryForObject("SELECT id, text, done, tag FROM schedule WHERE tag = ?",
 				new TodoRowMapper(), tag);
 	}
 
-	public List<TaskObject> getAll() {
-		// Map every row from the retrieved result set into a task object.
-		return jdbcTemplate.query("SELECT id, text, done, tag FROM schedule",
-				new TodoRowMapper());
-	}
+
 }
 
 class TodoRowMapper implements RowMapper<TaskObject> {
