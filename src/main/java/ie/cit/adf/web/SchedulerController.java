@@ -41,6 +41,8 @@ public class SchedulerController {
 	};
 	
 
+	// REST end-points
+	// curl http://localhost:8080/scheduler-app/todo/
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String create(@RequestParam String text) {
 	// Creates a new task by stripping the fields from URL.
