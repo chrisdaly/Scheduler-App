@@ -159,7 +159,7 @@ public class SchedulerController {
 		return template.expand(task.getId(), template).toASCIIString();
 	}
 
-	// Exception handler for findById if "Todo" item does not exist in repo
+	// Exception handler for findById if "Task" object doesn't exist in repo.
 	@ExceptionHandler(IncorrectResultSizeDataAccessException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public void notFound() {
