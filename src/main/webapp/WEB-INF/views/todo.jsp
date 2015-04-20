@@ -9,13 +9,19 @@
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
 <!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
 <!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+
+<!-- My CSS -->
+<link rel="stylesheet" href="/static/main.css">
 
 <!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 
 <!-- Bootstrap -->
 <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -28,6 +34,29 @@
 <script src="js/bootstrap.min.js"></script>
 
 <title>Scheduler</title>
+
+<style>
+form {
+}
+
+h1 {
+	margin: 0 auto;
+	width: 250px;
+}
+
+table, th, td {
+   border: ;
+}
+
+.table {
+	margin: 0 auto;
+	width: 60%;
+}
+
+.btn {
+
+}
+</style>
 
 </head>
 
@@ -51,25 +80,6 @@
 						<li class="active"><a href="#">Home</a></li>
 						<li><a href="#">About</a></li>
 						<li><a href="#">Contact</a></li>
-						<li class="dropdown"><a href="#" class="dropdown-toggle"
-							data-toggle="dropdown" role="button" aria-expanded="false">Dropdown
-								<span class="caret"></span>
-						</a>
-							<ul class="dropdown-menu" role="menu">
-								<li><a href="#">Action</a></li>
-								<li><a href="#">Another action</a></li>
-								<li><a href="#">Something else here</a></li>
-								<li class="divider"></li>
-								<li class="dropdown-header">Nav header</li>
-								<li><a href="#">Separated link</a></li>
-								<li><a href="#">One more separated link</a></li>
-							</ul></li>
-					</ul>
-					<ul class="nav navbar-nav navbar-right">
-						<li class="active"><a href="./">Default <span
-								class="sr-only">(current)</span></a></li>
-						<li><a href="../navbar-static-top/">Static top</a></li>
-						<li><a href="../navbar-fixed-top/">Fixed top</a></li>
 					</ul>
 				</div>
 				<!--/.nav-collapse -->
@@ -77,22 +87,54 @@
 			<!--/.container-fluid -->
 		</nav>
 
-		<h1>Scheduler items:</h1>
+<!-- 		<h1>Tasks:</h1>
+ -->
+ 	<br />
+		<form method="post" action="../todo/"  align=center>
+			<input name="text" type="text" value="" > <input name="create task"
+				class="btn btn-primary" type="submit" value="Create Task">
 
-		<form method="post" action="../todo/">
-			<input name="text" type="text" value=""> <input name="create"
-				type="submit" value="Create">
 		</form>
 
-		<c:forEach items="${todos}" var="todo" varStatus="row">
-			<form method="post" action="${todo.id}">
-				<input name="_method" type="hidden" value="delete"> <input
-					name="delete" type="submit" value="Delete"> ${row.index}.
-				${todo.text} ${todo.done }
-			</form>
+	</div>
 
+	<br />
+
+
+	<table class="table table-striped table-hover">
+		<thead>
+			<tr>
+				<th>Tag</th>
+				<th>Task</th>
+				<th>Status</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+
+
+		<c:forEach items="${todos}" var="todo" varStatus="row">
+			<tbody>
+				<td>${todo.tag}</td>
+				<td>${todo.text}</td>
+				<td>${todo.done}</td>
+
+				<td><a class="btn btn-primary"
+					href="/_edit/{{p.title}}?v={{p.key().id()}}"><i
+						class="icon-list"></i>Edit</a></td>
+
+				<td>
+					<form method="post" action="${todo.id}">
+						<input name="_method" type="hidden" value="delete"> <input
+							name="delete" type="submit" value="Delete" class="btn btn-danger">
+					</form>
+				</td>
+
+			</tbody>
 		</c:forEach>
 
-	</div>
+
+	</table>
+
 </body>
 </html>
