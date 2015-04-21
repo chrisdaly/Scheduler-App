@@ -120,8 +120,7 @@ table, th, td {
 				<td>${todo.done}</td>
 
 				<td><a class="btn btn-primary"
-					href="/_edit/{{p.title}}?v={{p.key().id()}}"><i
-						class="icon-list"></i>Edit</a></td>
+					href=""></i>Edit</a></td>
 
 				<td>
 					<form method="post" action="${todo.id}">
