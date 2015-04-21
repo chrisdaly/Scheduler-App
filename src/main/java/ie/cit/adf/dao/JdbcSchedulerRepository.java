@@ -14,7 +14,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JdbcSchedulerRepository implements ShedulerRepository {
+public class JdbcSchedulerRepository implements SchedulerRepository {
 // Specific implementation of the interface
 
 	private JdbcTemplate jdbcTemplate;

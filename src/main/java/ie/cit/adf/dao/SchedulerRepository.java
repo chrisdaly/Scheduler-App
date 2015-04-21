@@ -4,7 +4,7 @@ import ie.cit.adf.domain.TaskObject;
 
 import java.util.List;
 
-public interface ShedulerRepository {
+public interface SchedulerRepository {
 	void insert(TaskObject task);
 	
 	void delete(String id);

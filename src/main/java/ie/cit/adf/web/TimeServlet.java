@@ -1,6 +1,6 @@
 package ie.cit.adf.web;
 
-import ie.cit.adf.dao.ShedulerRepository;
+import ie.cit.adf.dao.SchedulerRepository;
 import ie.cit.adf.domain.TaskObject;
 
 import java.io.IOException;
@@ -19,7 +19,7 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 public class TimeServlet extends HttpServlet {
 
-	private ShedulerRepository todoRepository;
+	private SchedulerRepository todoRepository;
 
 	@Override
 	public void init() throws ServletException {
@@ -30,7 +30,7 @@ public class TimeServlet extends HttpServlet {
 		WebApplicationContext ctx = WebApplicationContextUtils
 				.getWebApplicationContext(servletContext);
 		
-		todoRepository = ctx.getBean(ShedulerRepository.class);
+		todoRepository = ctx.getBean(SchedulerRepository.class);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ie.cit.adf.dao.ShedulerRepository;
+import ie.cit.adf.dao.SchedulerRepository;
 import ie.cit.adf.domain.TaskObject;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,18 +28,17 @@ import org.springframework.web.util.UriTemplate;
 @Controller
 public class SchedulerController {
 
-	@Autowired
-	private ShedulerRepository repo;
+	private SchedulerRepository repo;
 
-	// private SchedulerRepository repo;
-	// public SchedulerController(ShedulerRepository repo) {
-	// this.repo = repo;
-	// }
+	// Controller should enforce that a repository be made.
+	@Autowired
+	public SchedulerController(SchedulerRepository repo) {
+		this.repo = repo;
+	}
 
 	// @RequestMappign automatically takes the parameter from the request and
 	// binds it to
 	// text value.
-
 	@RequestMapping("all")
 	public String getAllTodoItems(Model model) {
 		model.addAttribute("todos", repo.getAll());
