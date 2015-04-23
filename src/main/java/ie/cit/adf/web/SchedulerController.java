@@ -28,6 +28,7 @@ import org.springframework.web.util.UriTemplate;
 @Controller
 public class SchedulerController {
 
+	
 	private SchedulerRepository repo;
 
 	// Controller should enforce that a repository be made.
