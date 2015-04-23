@@ -99,7 +99,7 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody TaskObject getTodo(@PathVariable String id) {
+	public @ResponseBody TaskObject getTask(@PathVariable String id) {
 		// Gets a specific task by id.
 		return repo.findById(id);
 	}
@@ -127,7 +127,7 @@ public class SchedulerController {
 	 */
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE, produces = { "application/json" })
 	@ResponseStatus(HttpStatus.NO_CONTENT)
-	public void deleteTodo(@PathVariable String id) {
+	public void deleteTask(@PathVariable String id) {
 
 		// Removes the task to the repository.
 		repo.delete(id);
