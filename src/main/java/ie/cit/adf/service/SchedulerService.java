@@ -10,13 +10,13 @@ public interface SchedulerService {
 
 	TaskObject getTaskById(String id);
 
-	TaskObject createNewTodoWithText(String text);
+	TaskObject createNewTaskWithText(String text);
 
-	void deleteTodo(String id);
+	void deleteTask(String id);
 
-	void invertTodo(String id);
+	void invertTask(String id);
 
-	void updateTodoWithId(String id, TaskObject task);
+	void updateTaskWithId(String id, TaskObject task);
 
 }
 

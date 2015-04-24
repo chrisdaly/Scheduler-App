@@ -25,10 +25,10 @@ public class JdbcSchedulerRepository implements SchedulerRepository {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
-	public List<TaskObject> getAll() {
+	public List<TaskObject> getAllTasks() {
 		// Map every row from the retrieved result set into a task object.
 		return jdbcTemplate.query("SELECT id, text, done, tag FROM schedule",
-				new TodoRowMapper());
+				new TaskRowMapper());
 	}
 	
 	public void insert(TaskObject task) {
@@ -42,11 +42,10 @@ public class JdbcSchedulerRepository implements SchedulerRepository {
 		jdbcTemplate.update("DELETE FROM schedule WHERE id = ?", id);
 	}
 	
-
 	public TaskObject findById(String id) {
 		// Finds a task object by its id.
 		return jdbcTemplate.queryForObject("SELECT id, text, done, tag FROM schedule WHERE id = ?",
-				new TodoRowMapper(), id);
+				new TaskRowMapper(), id);
 	}
 	
 	public void update(TaskObject task) {
@@ -56,7 +55,7 @@ public class JdbcSchedulerRepository implements SchedulerRepository {
 	}
 }
 
-class TodoRowMapper implements RowMapper<TaskObject> {
+class TaskRowMapper implements RowMapper<TaskObject> {
 
 	public TaskObject mapRow(ResultSet rs, int rowNum) throws SQLException {
 		// From result set extract the fields for one row at a time.

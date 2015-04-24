@@ -19,7 +19,7 @@ public class SchedulerApplication {
 		SchedulerRepository schedulerRepository = ctx.getBean(SchedulerRepository.class);
 
 		// List out all the tasks in the DB.
-		List<TaskObject> all = schedulerRepository.getAll();
+		List<TaskObject> all = schedulerRepository.getAllTasks();
 		System.out.println(all);
 
 		// Create a new task object and insert it into the DB.

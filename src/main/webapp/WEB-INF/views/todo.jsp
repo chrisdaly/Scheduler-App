@@ -37,6 +37,7 @@
 
 <style>
 form {
+	
 }
 
 h1 {
@@ -45,7 +46,7 @@ h1 {
 }
 
 table, th, td {
-   border: ;
+	border:;
 }
 
 .table {
@@ -54,86 +55,269 @@ table, th, td {
 }
 
 .btn {
+	padding: 30px
+}
 
+tbody tr:nth-child(odd) {
+/*    background-color: #ccc; */
+}
+
+/*
+ * Globals
+ */
+
+/* Links */
+a, a:focus, a:hover {
+	color: #fff;
+}
+
+/* Custom default button */
+.btn-default, .btn-default:hover, .btn-default:focus {
+	color: #333;
+	text-shadow: none; /* Prevent inheritence from `body` */
+	background-color: #fff;
+	border: 1px solid #fff;
+}
+
+/*
+ * Base structure
+ */
+html, body {
+	height: 100%;
+	background-color: #333;
+}
+
+body {
+	color: #fff;
+	text-align: center;
+	text-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+}
+
+/* Extra markup and styles for table-esque vertical and horizontal centering */
+.site-wrapper {
+	display: table;
+	width: 100%;
+	height: 100%; /* For at least Firefox */
+	min-height: 100%;
+	-webkit-box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+	box-shadow: inset 0 0 100px rgba(0, 0, 0, .5);
+}
+
+.site-wrapper-inner {
+	display: table-cell;
+	vertical-align: top;
+}
+
+.cover-container {
+	margin-right: auto;
+	margin-left: auto;
+}
+
+/* Padding for spacing */
+.inner {
+	padding: 30px;
+}
+
+/*
+ * Header
+ */
+.masthead-brand {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.masthead-nav>li {
+	display: inline-block;
+}
+
+.masthead-nav>li+li {
+	margin-left: 20px;
+}
+
+.masthead-nav>li>a {
+	padding-right: 0;
+	padding-left: 0;
+	font-size: 16px;
+	font-weight: bold;
+	color: #fff; /* IE8 proofing */
+	color: rgba(255, 255, 255, .75);
+	border-bottom: 2px solid transparent;
+}
+
+.masthead-nav>li>a:hover, .masthead-nav>li>a:focus {
+	background-color: transparent;
+	border-bottom-color: #a9a9a9;
+	border-bottom-color: rgba(255, 255, 255, .25);
+}
+
+.masthead-nav>.active>a, .masthead-nav>.active>a:hover, .masthead-nav>.active>a:focus
+	{
+	color: #fff;
+	border-bottom-color: #fff;
+}
+
+@media ( min-width : 768px) {
+	.masthead-brand {
+		float: left;
+	}
+	.masthead-nav {
+		float: right;
+	}
+}
+
+/*
+ * Cover
+ */
+.cover {
+	padding: 0 20px;
+}
+
+.cover .btn-lg {
+	padding: 10px 20px;
+	font-weight: bold;
+}
+
+/*
+ * Footer
+ */
+.mastfoot {
+	color: #999; /* IE8 proofing */
+	color: rgba(255, 255, 255, .5);
+}
+
+/*
+ * Affix and center
+ */
+@media ( min-width : 768px) {
+	/* Pull out the header and footer */
+	.masthead {
+		position: fixed;
+		top: 0;
+	}
+	.mastfoot {
+		position: fixed;
+		bottom: 0;
+	}
+	/* Start the vertical centering */
+	.site-wrapper-inner {
+		vertical-align: middle;
+	}
+	/* Handle the widths */
+	.masthead, .mastfoot, .cover-container {
+		width: 100%;
+		/* Must be percentage or pixels for horizontal alignment */
+	}
+}
+
+@media ( min-width : 992px) {
+	.masthead, .mastfoot, .cover-container {
+		width: 700px;
+	}
 }
 </style>
 
 </head>
 
+
+
 <body>
 
-	<div class="container">
-		<nav class="navbar navbar-default">
-			<div class="container-fluid">
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed"
-						data-toggle="collapse" data-target="#navbar" aria-expanded="false"
-						aria-controls="navbar">
-						<span class="sr-only">Toggle navigation</span> <span
-							class="icon-bar"></span> <span class="icon-bar"></span> <span
-							class="icon-bar"></span>
-					</button>
-					<a class="navbar-brand" href="#">Scheduler</a>
+	<div class="site-wrapper">
+
+		<div class="site-wrapper-inner">
+
+			<div class="cover-container">
+
+				<div class="masthead clearfix">
+					<div class="inner">
+						<h3 class="masthead-brand">Scheduler</h3>
+						<nav>
+							<ul class="nav masthead-nav">
+								<li class="active"><a href="#">Home</a></li>
+								<li><a href="#">Features</a></li>
+								<li><a href="#">Contact</a></li>
+							</ul>
+						</nav>
+					</div>
 				</div>
-				<div id="navbar" class="navbar-collapse collapse">
-					<ul class="nav navbar-nav">
-						<li class="active"><a href="#">Home</a></li>
-						<li><a href="#">About</a></li>
-						<li><a href="#">Contact</a></li>
-					</ul>
+
+<h1>17:53</h1>
+<h2>Friday </h2>
+<h2>24th April 2015</h2>
+
+				<div class="inner cover">
+					<form method="post" action="../todo/" align=center>
+						<input name="text" type="text" value="">
+
+						<p class="lead">
+							<br /> <input name="create task" class="btn btn-lg btn-default"
+								type="submit" value="Create Task">
+						</p>
+
+					</form>
+
 				</div>
-				<!--/.nav-collapse -->
+
+				<div>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>Tag</th>
+								<th>Task</th>
+								<th>Status</th>
+								<th>Edit</th>
+								<th>Delete</th>
+							</tr>
+						</thead>
+
+
+						<c:forEach items="${todos}" var="todo" varStatus="row">
+							<tbody>
+								<td>${todo.tag}</td>
+								<td>${todo.text}</td>
+								<td>${todo.done}</td>
+
+								<td><a class="btn btn-primary" href=""></i>Edit</a></td>
+
+								<td>
+									<form method="post" action="${todo.id}">
+										<input name="_method" type="hidden" value="delete"> <input
+											name="delete" type="submit" value="Delete"
+											class="btn btn-danger">
+									</form>
+								</td>
+
+							</tbody>
+						</c:forEach>
+
+
+					</table>
+				</div>
+
+
+				<div class="mastfoot">
+					<div class="inner">
+						<p>
+							Cover template for <a href="http://getbootstrap.com">Bootstrap</a>,
+							by <a href="https://twitter.com/mdo">@mdo</a>.
+						</p>
+					</div>
+				</div>
+
 			</div>
-			<!--/.container-fluid -->
-		</nav>
 
-<!-- 		<h1>Tasks:</h1>
- -->
- 	<br />
-		<form method="post" action="../todo/"  align=center>
-			<input name="text" type="text" value="" > <input name="create task"
-				class="btn btn-primary" type="submit" value="Create Task">
-
-		</form>
+		</div>
 
 	</div>
 
-	<br />
-
-
-	<table class="table table-striped table-hover">
-		<thead>
-			<tr>
-				<th>Tag</th>
-				<th>Task</th>
-				<th>Status</th>
-				<th>Edit</th>
-				<th>Delete</th>
-			</tr>
-		</thead>
-
-
-		<c:forEach items="${todos}" var="todo" varStatus="row">
-			<tbody>
-				<td>${todo.tag}</td>
-				<td>${todo.text}</td>
-				<td>${todo.done}</td>
-
-				<td><a class="btn btn-primary"
-					href=""></i>Edit</a></td>
-
-				<td>
-					<form method="post" action="${todo.id}">
-						<input name="_method" type="hidden" value="delete"> <input
-							name="delete" type="submit" value="Delete" class="btn btn-danger">
-					</form>
-				</td>
-
-			</tbody>
-		</c:forEach>
-
-
-	</table>
-
+	<!-- Bootstrap core JavaScript
+    ================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+	<script src="../../dist/js/bootstrap.min.js"></script>
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 </body>
+
 </html>

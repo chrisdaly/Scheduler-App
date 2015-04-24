@@ -9,7 +9,7 @@ public interface SchedulerRepository {
 	
 	void delete(String id);
 
-	List<TaskObject> getAll();
+	List<TaskObject> getAllTasks();
 
 	TaskObject findById(String id);
 

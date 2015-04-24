@@ -42,7 +42,7 @@ public class SchedulerControllerTest {
 			public void insert(TaskObject task) {
 			}
 
-			public List<TaskObject> getAll() {
+			public List<TaskObject> getAllTasks() {
 				methodInvoked[0] = true;
 
 				return new ArrayList<TaskObject>();
@@ -62,7 +62,7 @@ public class SchedulerControllerTest {
 		SchedulerController tested = new SchedulerController(repo);
 
 		// Check that the getAll method returns something.
-		List<TaskObject> all = tested.getAllTodoItems();
+		List<TaskObject> all = tested.getAllTaskItems();
 		assertThat(all, notNullValue());
 		assertThat(methodInvoked[0], equalTo(true));
 
@@ -84,7 +84,7 @@ public class SchedulerControllerTest {
 				tasks[0] = task;
 			}
 
-			public List<TaskObject> getAll() {
+			public List<TaskObject> getAllTasks() {
 				return new ArrayList<TaskObject>();
 			}
 
@@ -108,11 +108,11 @@ public class SchedulerControllerTest {
 	@Test
 	public void testGetAllMock() {
 		// Check that the getAll method returns something.
-		List<TaskObject> all = tested.getAllTodoItems();
+		List<TaskObject> all = tested.getAllTaskItems();
 		assertThat(all, notNullValue());
 
 		// Verify that the method actually gets called.
-		Mockito.verify(repo, Mockito.times(1)).getAll();
+		Mockito.verify(repo, Mockito.times(1)).getAllTasks();
 	}
 
 	@Test

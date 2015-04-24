@@ -11,7 +11,7 @@ import ie.cit.adf.domain.TaskObject;
 
 @Component
 @Transactional
-public class SchedulerServiceImpl {
+public class SchedulerServiceImpl implements SchedulerService {
 
 	SchedulerRepository repo;
 
@@ -21,34 +21,35 @@ public class SchedulerServiceImpl {
 	}
 
 	public List<TaskObject> getAllTasks() {
-		return repo.getAll();
+		return repo.getAllTasks();
 	}
 
-	public TaskObject getTodoById(String id) {
+	public TaskObject getTaskById(String id) {
 		return repo.findById(id);
 	}
 
-	public TaskObject createNewTodoWithText(String text) {
+	public TaskObject createNewTaskWithText(String text) {
 		TaskObject task = new TaskObject();
 		task.setText(text);
 		repo.insert(task);
 		return task;
 	}
 
-	public void deleteTodo(String id) {
+	public void deleteTask(String id) {
 		repo.delete(id);
 	}
 
-	public void invertTodo(String id) {
+	public void invertTask(String id) {
 		TaskObject task = repo.findById(id);
 		task.setDone(!task.isDone());
 		repo.update(task);
 	}
 
-	public void updateTodoWithId(String id, TaskObject task) {
+	public void updateTaskWithId(String id, TaskObject task) {
 		TaskObject tmpTask = repo.findById(id);
 		tmpTask.setDone(task.isDone());
 		tmpTask.setText(task.getText());
 		repo.update(task);
 	}
+
 }

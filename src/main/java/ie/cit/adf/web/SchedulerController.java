@@ -22,13 +22,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriTemplate;
 
 @Controller
 public class SchedulerController {
 
-	
 	private SchedulerRepository repo;
 
 	// Controller should enforce that a repository be made.
@@ -41,8 +39,8 @@ public class SchedulerController {
 	// binds it to
 	// text value.
 	@RequestMapping("all")
-	public String getAllTodoItems(Model model) {
-		model.addAttribute("todos", repo.getAll());
+	public String getAllTaskItems(Model model) {
+		model.addAttribute("todos", repo.getAllTasks());
 		return "todo";
 	};
 
@@ -87,9 +85,9 @@ public class SchedulerController {
 	// curl http://localhost:8080/scheduler-app/todo/
 	@RequestMapping(value = { "all", "/" }, method = RequestMethod.GET, produces = "application/json")
 	@ResponseStatus(HttpStatus.OK)
-	public @ResponseBody List<TaskObject> getAllTodoItems() {
+	public @ResponseBody List<TaskObject> getAllTaskItems() {
 		// Gets all the tasks.
-		return repo.getAll();
+		return repo.getAllTasks();
 	}
 
 	/*
@@ -117,7 +115,7 @@ public class SchedulerController {
 		repo.insert(task);
 
 		// Returns the resource location.
-		String location = getLocationForTodoResource(task, request);
+		String location = getLocationForTaskResource(task, request);
 		response.addHeader("Location", location);
 	}
 
@@ -151,7 +149,7 @@ public class SchedulerController {
 	}
 
 	// Helper methods
-	private String getLocationForTodoResource(TaskObject task,
+	private String getLocationForTaskResource(TaskObject task,
 			HttpServletRequest request) {
 		StringBuffer url = request.getRequestURL();
 		UriTemplate template = new UriTemplate(url.append("/{childId}")
@@ -164,7 +162,5 @@ public class SchedulerController {
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public void notFound() {
 	}
-
 }
-
 // /

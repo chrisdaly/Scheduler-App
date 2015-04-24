@@ -44,7 +44,7 @@ public class TimeServlet extends HttpServlet {
 		writer.println(msg);
 		writer.close();
 
-		List<TaskObject> all = todoRepository.getAll();
+		List<TaskObject> all = todoRepository.getAllTasks();
 		System.out.println(all);
 
 	}
