@@ -59,7 +59,8 @@ table, th, td {
 }
 
 tbody tr:nth-child(odd) {
-/*    background-color: #ccc; */
+	/*    background-color: #ccc; */
+	
 }
 
 /*
@@ -233,17 +234,16 @@ body {
 						<h3 class="masthead-brand">Scheduler</h3>
 						<nav>
 							<ul class="nav masthead-nav">
-								<li class="active"><a href="#">Home</a></li>
-								<li><a href="#">Features</a></li>
-								<li><a href="#">Contact</a></li>
+								<li class="active"><a href="#">Chris</a></li>
+								<li><a href="#">Logout</a></li>
 							</ul>
 						</nav>
 					</div>
 				</div>
 
-<h1>17:53</h1>
-<h2>Friday </h2>
-<h2>24th April 2015</h2>
+				<h1>17:53</h1>
+				<h2>Friday</h2>
+				<h2>24th April 2015</h2>
 
 				<div class="inner cover">
 					<form method="post" action="../todo/" align=center>
@@ -298,8 +298,8 @@ body {
 				<div class="mastfoot">
 					<div class="inner">
 						<p>
-							Cover template for <a href="http://getbootstrap.com">Bootstrap</a>,
-							by <a href="https://twitter.com/mdo">@mdo</a>.
+							App by <a href="https://github.com/chrisdaly/Scheduler-App/">Chris
+								Daly.</a>
 						</p>
 					</div>
 				</div>
