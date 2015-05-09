@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import ie.cit.adf.dao.SchedulerRepository;
 import ie.cit.adf.domain.TaskObject;
+import ie.cit.adf.service.SchedulerService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
@@ -27,12 +28,11 @@ import org.springframework.web.util.UriTemplate;
 @Controller
 public class SchedulerController {
 
-	private SchedulerRepository repo;
+	private SchedulerService service;
 
-	// Controller should enforce that a repository be made.
 	@Autowired
-	public SchedulerController(SchedulerRepository repo) {
-		this.repo = repo;
+	public SchedulerController(SchedulerService repo) {
+		this.service = repo;
 	}
 
 	// @RequestMappign automatically takes the parameter from the request and
@@ -40,7 +40,7 @@ public class SchedulerController {
 	// text value.
 	@RequestMapping("all")
 	public String getAllTaskItems(Model model) {
-		model.addAttribute("todos", repo.getAllTasks());
+		model.addAttribute("todos", service.getAllTasks());
 		return "todo";
 	};
 
@@ -49,11 +49,11 @@ public class SchedulerController {
 		// Creates a new task by stripping the fields from URL.
 		System.out.println(text);
 
-		TaskObject task = new TaskObject();
-		task.setText(text);
-		repo.insert(task);
+		//TaskObject task = new TaskObject();
+		//task.setText(text);
+		service.createNewTaskWithText(text);
 
-		System.out.println(task);
+		System.out.println(text);
 
 		return "redirect:all";
 	}
@@ -62,7 +62,7 @@ public class SchedulerController {
 	public String delete(@PathVariable String id) {
 		// Deletes a task by id.
 		System.out.println(id);
-		repo.delete(id);
+		service.deleteTask(id);
 
 		return "redirect:all";
 	}
@@ -72,11 +72,11 @@ public class SchedulerController {
 		// Changes the status of a task.
 
 		// Find specific task by id.
-		TaskObject task = repo.findById(id);
+		//TaskObject task = service.findById(id);
 
 		// Flip the task status.
-		task.setDone(!task.isDone());
-		repo.update(task);
+		//task.setDone(!task.isDone());
+		service.invertTask(id);
 
 		return "redirect:all";
 	}
@@ -87,7 +87,7 @@ public class SchedulerController {
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody List<TaskObject> getAllTaskItems() {
 		// Gets all the tasks.
-		return repo.getAllTasks();
+		return service.getAllTasks();
 	}
 
 	/*
@@ -99,7 +99,7 @@ public class SchedulerController {
 	@ResponseStatus(HttpStatus.OK)
 	public @ResponseBody TaskObject getTask(@PathVariable String id) {
 		// Gets a specific task by id.
-		return repo.findById(id);
+		return service.getTaskById(id);
 	}
 
 	/*
@@ -112,10 +112,13 @@ public class SchedulerController {
 			HttpServletRequest request, HttpServletResponse response) {
 
 		// Adds the task to the repository.
-		repo.insert(task);
+		//service.insert(task);
 
+		TaskObject newTask = service.createNewTaskWithText(task.getText());
+		
+		
 		// Returns the resource location.
-		String location = getLocationForTaskResource(task, request);
+		String location = getLocationForTaskResource(newTask, request);
 		response.addHeader("Location", location);
 	}
 
@@ -128,7 +131,7 @@ public class SchedulerController {
 	public void deleteTask(@PathVariable String id) {
 
 		// Removes the task to the repository.
-		repo.delete(id);
+		service.deleteTask(id);
 	}
 
 	/*
@@ -141,11 +144,13 @@ public class SchedulerController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void update(@PathVariable String id, @RequestBody TaskObject task) {
 		// Search for the task by id in the repository.
-		TaskObject taskStored = repo.findById(id);
-		task.setId(taskStored.getId());
+		//TaskObject taskStored = repo.findById(id);
+		//task.setId(taskStored.getId());
 
 		// Flip the status of the task.
-		repo.update(task);
+		//repo.update(task);
+		
+		service.updateTaskWithId(id, task);
 	}
 
 	// Helper methods

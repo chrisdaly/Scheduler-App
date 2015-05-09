@@ -10,7 +10,7 @@ import ie.cit.adf.dao.SchedulerRepository;
 import ie.cit.adf.domain.TaskObject;
 
 @Component
-@Transactional
+//@Transactional
 public class SchedulerServiceImpl implements SchedulerService {
 
 	SchedulerRepository repo;
