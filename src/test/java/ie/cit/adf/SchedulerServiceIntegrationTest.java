@@ -1,7 +1,10 @@
 package ie.cit.adf;
 
+import ie.cit.adf.domain.TaskObject;
 import ie.cit.adf.service.SchedulerService;
 
+import org.hamcrest.CoreMatchers;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,9 @@ public class SchedulerServiceIntegrationTest {
 	
 	@Test
 	public void testCreateTask(){
-		System.out.println(tested);
+		TaskObject newTask = tested.createNewTaskWithText("new task");
+		TaskObject taskFromDB = tested.getTaskById(newTask.getId());
+		Assert.assertThat(newTask.getText(),
+				CoreMatchers.equalTo(taskFromDB.getText()));
 	}
 }
