@@ -3,6 +3,7 @@ package ie.cit.adf.web;
 import static org.junit.Assert.*;
 import ie.cit.adf.dao.SchedulerRepository;
 import ie.cit.adf.domain.TaskObject;
+import ie.cit.adf.service.SchedulerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,13 +18,13 @@ import org.mockito.Mockito;
 
 public class SchedulerControllerTest {
 
-	private SchedulerRepository repo;
+	private SchedulerService service;
 	private SchedulerController tested;
 
 	@Before
 	public void setup() {
-		repo = Mockito.mock(SchedulerRepository.class);
-		tested = new SchedulerController(repo);
+		service = Mockito.mock(SchedulerService.class);
+		tested = new SchedulerController(service);
 	}
 
 	@Test

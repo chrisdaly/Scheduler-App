@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
@@ -24,7 +25,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
-//@ImportResource("classpath:beans.xml")
+@ImportResource("classpath:beans.xml")
 @ComponentScan(basePackages = "ie.cit.adf.dao ie.cit.adf.service")
 @EnableAspectJAutoProxy
 @EnableTransactionManagement
@@ -65,6 +66,7 @@ public class RootApplicationContext extends WebSecurityConfigurerAdapter {
 		return new TracingAspect();
 	}
 
+	// Production DB.
 	@Bean(name = "dataSource")
 	@Profile("cloud")
 	public DataSource dataSource() {
@@ -76,6 +78,7 @@ public class RootApplicationContext extends WebSecurityConfigurerAdapter {
 		return ds;
 	}
 
+	// Testing DB.
 	@Bean(name = "dataSource")
 	@Profile("dev")
 	public DataSource dataSourceDev() {

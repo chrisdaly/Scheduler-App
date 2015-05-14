@@ -11,6 +11,7 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -26,15 +27,22 @@ public class JdbcSchedulerRepository implements SchedulerRepository {
 	}
 
 	public List<TaskObject> getAllTasks() {
-		// Map every row from the retrieved result set into a task object.
-		return jdbcTemplate.query("SELECT id, text, done, tag FROM schedule",
-				new TaskRowMapper());
+		// Retrieve the intersection of tasks from the schedule database and owner database's rows which have the user id.
+		return jdbcTemplate.query("SELECT id, text, done, tag FROM schedule, owners WHERE owners.todoid=schedule.id AND username=?",
+				new TaskRowMapper(), SecurityContextHolder.getContext().getAuthentication().getName());
+		
 	}
 	
 	public void insert(TaskObject task) {
+		
 		// Inserts a task object into the repository.
 		jdbcTemplate.update("INSERT INTO schedule(id, text, done, tag) values(?,?,?,?)",
 				task.getId(), task.getText(), task.isDone(), task.getTag());
+	
+		// Associate task with currently authenticated user.
+		jdbcTemplate.update("insert into owners(todoid, username) values(?,?)",
+				task.getId(), SecurityContextHolder.getContext().getAuthentication().getName());
+		
 	}
 	
 	public void delete(String id) {
