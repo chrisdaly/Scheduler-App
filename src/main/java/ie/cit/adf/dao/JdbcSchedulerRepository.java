@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JdbcSchedulerRepository implements SchedulerRepository {
-// Specific implementation of the interface
+	// Specific implementation of the interface
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -27,35 +27,39 @@ public class JdbcSchedulerRepository implements SchedulerRepository {
 	}
 
 	public List<TaskObject> getAllTasks() {
-		// Retrieve the intersection of tasks from the schedule database and owner database's rows which have the user id.
-		return jdbcTemplate.query("SELECT id, text, done, tag FROM schedule, owners WHERE owners.todoid=schedule.id AND username=?",
-				new TaskRowMapper(), SecurityContextHolder.getContext().getAuthentication().getName());
-		
+		// Retrieve the intersection of tasks from the schedule database and
+		// owner database's rows which have the user id.
+		return jdbcTemplate
+				.query("SELECT id, text, done, tag FROM schedule, owners WHERE owners.todoid=schedule.id AND username=?",
+						new TaskRowMapper(), SecurityContextHolder.getContext()
+								.getAuthentication().getName());
 	}
-	
+
 	public void insert(TaskObject task) {
-		
 		// Inserts a task object into the repository.
-		jdbcTemplate.update("INSERT INTO schedule(id, text, done, tag) values(?,?,?,?)",
+		jdbcTemplate.update(
+				"INSERT INTO schedule(id, text, done, tag) values(?,?,?,?)",
 				task.getId(), task.getText(), task.isDone(), task.getTag());
-	
+
 		// Associate task with currently authenticated user.
-		jdbcTemplate.update("insert into owners(todoid, username) values(?,?)",
-				task.getId(), SecurityContextHolder.getContext().getAuthentication().getName());
-		
+		jdbcTemplate.update("INSERT INTO owners(todoid, username) values(?,?)",
+				task.getId(), SecurityContextHolder.getContext()
+						.getAuthentication().getName());
 	}
-	
+
 	public void delete(String id) {
-		// Deletes a task object from the repository.
+		// Deletes a task object from the repositories.
+		jdbcTemplate.update("DELETE FROM owners WHERE todoid = ?", id);
 		jdbcTemplate.update("DELETE FROM schedule WHERE id = ?", id);
 	}
-	
+
 	public TaskObject findById(String id) {
 		// Finds a task object by its id.
-		return jdbcTemplate.queryForObject("SELECT id, text, done, tag FROM schedule WHERE id = ?",
+		return jdbcTemplate.queryForObject(
+				"SELECT id, text, done, tag FROM schedule WHERE id = ?",
 				new TaskRowMapper(), id);
 	}
-	
+
 	public void update(TaskObject task) {
 		// Changes the fields of a current task object to latest information.
 		jdbcTemplate.update("UPDATE schedule SET text=?, done=? WHERE id=?",
@@ -71,7 +75,7 @@ class TaskRowMapper implements RowMapper<TaskObject> {
 		String text = rs.getString("text");
 		boolean done = rs.getBoolean("done");
 		String tag = rs.getString("tag");
-		
+
 		// Create a new task object based on the query results.
 		TaskObject task = new TaskObject();
 		task.setId(id);
@@ -81,4 +85,3 @@ class TaskRowMapper implements RowMapper<TaskObject> {
 		return task;
 	}
 }
-//
