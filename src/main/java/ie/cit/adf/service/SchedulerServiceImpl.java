@@ -30,7 +30,16 @@ public class SchedulerServiceImpl implements SchedulerService {
 
 	public TaskObject createNewTaskWithText(String text) {
 		TaskObject task = new TaskObject();
-		task.setText(text);
+		
+		String delims = "#";
+		String[] tokens = text.split(delims);
+		
+		task.setText(tokens[0]);
+		
+		if (tokens.length > 1) {
+			task.setTag(tokens[1]);
+        }
+		
 		repo.insert(task);
 		return task;
 	}
