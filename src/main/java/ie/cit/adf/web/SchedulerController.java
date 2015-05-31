@@ -1,7 +1,11 @@
 package ie.cit.adf.web;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,17 +44,37 @@ public class SchedulerController {
 	// text value.
 	@RequestMapping("all")
 	public String getAllTaskItems(Model model) {
+		// Getting the time and date.
+		DateFormat timeFormat = new SimpleDateFormat("HH:mm");
+		DateFormat dateFormat = new SimpleDateFormat("E dd/MM/yyyy");
+		Calendar cal = Calendar.getInstance();
+		String time = timeFormat.format(cal.getTime());
+		String date = dateFormat.format(cal.getTime());
+
+		model.addAttribute("time", time);
+		model.addAttribute("date", date);
+
+		// Improve - move the boolean manipulation (false -> "Not yet") from jsp
+		// to here. Boolean to text?
+		// List<TaskObject> tasks = service.getAllTasks();
+
 		model.addAttribute("todos", service.getAllTasks());
-		return "todo";
+
+		return "scheduler";
 	};
+
+	@RequestMapping("/login")
+	public String login() {
+		return "login";
+	}
 
 	@RequestMapping(value = "/", method = RequestMethod.POST)
 	public String create(@RequestParam String text) {
 		// Creates a new task by stripping the fields from URL.
 		System.out.println(text);
 
-		//TaskObject task = new TaskObject();
-		//task.setText(text);
+		// TaskObject task = new TaskObject();
+		// task.setText(text);
 		service.createNewTaskWithText(text);
 
 		System.out.println(text);
@@ -70,12 +94,6 @@ public class SchedulerController {
 	@RequestMapping(value = "{id}", method = RequestMethod.PUT)
 	public String update(@PathVariable String id) {
 		// Changes the status of a task.
-
-		// Find specific task by id.
-		//TaskObject task = service.findById(id);
-
-		// Flip the task status.
-		//task.setDone(!task.isDone());
 		service.invertTask(id);
 
 		return "redirect:all";
@@ -112,11 +130,10 @@ public class SchedulerController {
 			HttpServletRequest request, HttpServletResponse response) {
 
 		// Adds the task to the repository.
-		//service.insert(task);
+		// service.insert(task);
 
 		TaskObject newTask = service.createNewTaskWithText(task.getText());
-		
-		
+
 		// Returns the resource location.
 		String location = getLocationForTaskResource(newTask, request);
 		response.addHeader("Location", location);
@@ -129,7 +146,6 @@ public class SchedulerController {
 	@RequestMapping(value = "{id}", method = RequestMethod.DELETE, produces = { "application/json" })
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void deleteTask(@PathVariable String id) {
-
 		// Removes the task to the repository.
 		service.deleteTask(id);
 	}
@@ -144,12 +160,6 @@ public class SchedulerController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void update(@PathVariable String id, @RequestBody TaskObject task) {
 		// Search for the task by id in the repository.
-		//TaskObject taskStored = repo.findById(id);
-		//task.setId(taskStored.getId());
-
-		// Flip the status of the task.
-		//repo.update(task);
-		
 		service.updateTaskWithId(id, task);
 	}
 

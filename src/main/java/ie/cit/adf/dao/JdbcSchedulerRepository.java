@@ -75,7 +75,7 @@ class TaskRowMapper implements RowMapper<TaskObject> {
 		String text = rs.getString("text");
 		boolean done = rs.getBoolean("done");
 		String tag = rs.getString("tag");
-
+		
 		// Create a new task object based on the query results.
 		TaskObject task = new TaskObject();
 		task.setId(id);

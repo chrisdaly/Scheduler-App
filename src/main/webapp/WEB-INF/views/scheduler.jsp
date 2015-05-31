@@ -112,17 +112,10 @@ body>#container {
 				</div>
 			</nav>
 
-			<%
-				Date dNow = new Date();
-				SimpleDateFormat ft = new SimpleDateFormat("hh:mm");
-				out.print("<h3 align=\"center\">" + ft.format(dNow) + "</h3>");
-			%>
-
-			<%
-				Date dNow2 = new Date();
-				SimpleDateFormat ft2 = new SimpleDateFormat("E dd/MM/yyyy");
-				out.print("<h4 align=\"center\">" + ft2.format(dNow2) + "</h4>");
-			%>
+			<div id="time" align=center>
+				<h3>${time}</h3>
+				<h4>${date}</h4>
+			</div>
 
 			<br />
 			<form method="post" action="../todo/" align=center>
@@ -139,29 +132,33 @@ body>#container {
 						<tr>
 							<th>Tag</th>
 							<th>Task</th>
-							<th>Status</th>
-							<th>Edit</th>
+							<th>Finished?</th>
+							<th>Update</th>
 							<th>Delete</th>
 						</tr>
 					</thead>
 
 					<c:forEach items="${todos}" var="todo" varStatus="row">
 						<tbody>
+							<c:if test="condition"></c:if>
 							<td>${todo.tag}</td>
 							<td>${todo.text}</td>
-							<td>${todo.done}</td>
+							<td><c:choose>
+									<c:when test="${todo.done}">
+    								Yes
+  								</c:when>
+									<c:otherwise>
+   									 Not Yet
+  								</c:otherwise>
+								</c:choose></td>
 
 							<td>
-
-
 								<form method="post" action="${todo.id}">
 									<input name="_method" type="hidden" value="put"> <input
-										name="put" type="submit" value="Edit" class="btn btn-primary">
+										name="put" type="submit" value="Update"
+										class="btn btn-primary">
 								</form>
 							</td>
-
-
-
 
 							<td>
 								<form method="post" action="${todo.id}">
@@ -189,8 +186,5 @@ body>#container {
 
 	</div>
 
-
 </body>
 </html>
-
-/////

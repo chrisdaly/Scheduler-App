@@ -34,23 +34,22 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 public class RootApplicationContext extends WebSecurityConfigurerAdapter {
 	@Autowired
 	DataSource ds;
-	
+
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/todo/**")
-		.hasRole("USER")
-		.and()
-		.formLogin().defaultSuccessUrl("/todo/all")
-		.and()
-		.httpBasic()
-		.and()
-		.csrf().disable();
+		http.authorizeRequests().antMatchers("/todo/**").hasRole("USER").and()
+				.formLogin().defaultSuccessUrl("/todo/all").and().httpBasic()
+				.and().csrf().disable();
+
+		http.authorizeRequests().anyRequest().authenticated().and().formLogin()
+				.loginPage("/login").permitAll();
 	}
-	
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth)
 			throws Exception {
-		auth.jdbcAuthentication().dataSource(ds).passwordEncoder(new BCryptPasswordEncoder());
+		auth.jdbcAuthentication().dataSource(ds)
+				.passwordEncoder(new BCryptPasswordEncoder());
 	}
 
 	@Autowired
@@ -87,4 +86,5 @@ public class RootApplicationContext extends WebSecurityConfigurerAdapter {
 		ds.setUrl("jdbc:postgresql://localhost:5432/tododb");
 		return ds;
 	}
+
 }
