@@ -30,7 +30,7 @@
 
 	<servlet-mapping>
 		<servlet-name>dispatcher</servlet-name>
-		<url-pattern>/todo/*</url-pattern>
+		<url-pattern>/myschedule/*</url-pattern>
 	</servlet-mapping>
 
 	<filter>

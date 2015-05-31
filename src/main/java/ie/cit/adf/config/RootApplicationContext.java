@@ -37,12 +37,12 @@ public class RootApplicationContext extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests().antMatchers("/todo/**").hasRole("USER").and()
-				.formLogin().defaultSuccessUrl("/todo/all").and().httpBasic()
+		http.authorizeRequests().antMatchers("/myschedule/**").hasRole("USER").and()
+				.formLogin().loginPage("/login").defaultSuccessUrl("/myschedule/all").and().httpBasic()
 				.and().csrf().disable();
 
-		http.authorizeRequests().anyRequest().authenticated().and().formLogin()
-				.loginPage("/login").permitAll();
+/*		http.authorizeRequests().anyRequest().authenticated().and().formLogin()
+				.loginPage("/login").permitAll();*/
 	}
 
 	@Override

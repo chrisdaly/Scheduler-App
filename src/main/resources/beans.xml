@@ -31,9 +31,10 @@
 
 	<security:http>
 		<security:csrf disabled="true" />
-		<security:intercept-url pattern="/todo/**"
+		<security:intercept-url pattern="/myschedule/**"
 			access="hasRole('USER')" />
-		<security:form-login default-target-url="/todo/all" />
+		<security:form-login default-target-url="/myschedule/all" />
+		<!-- <security:form-login login-page="/login" default-target-url="/myschedule/all" /> -->
 		<security:http-basic />
 		<security:logout />
 	</security:http>
@@ -50,5 +51,7 @@
 				password="123" /> </security:user-service> -->
 		</security:authentication-provider>
 	</security:authentication-manager>
+
+
 
 </beans>

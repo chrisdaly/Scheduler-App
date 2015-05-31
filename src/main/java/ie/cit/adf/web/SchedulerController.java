@@ -3,14 +3,11 @@ package ie.cit.adf.web;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import ie.cit.adf.dao.SchedulerRepository;
 import ie.cit.adf.domain.TaskObject;
 import ie.cit.adf.service.SchedulerService;
 
@@ -58,12 +55,12 @@ public class SchedulerController {
 		// to here. Boolean to text?
 		// List<TaskObject> tasks = service.getAllTasks();
 
-		model.addAttribute("todos", service.getAllTasks());
+		model.addAttribute("tasks", service.getAllTasks());
 
 		return "scheduler";
 	};
 
-	@RequestMapping("/login")
+	@RequestMapping("login")
 	public String login() {
 		return "login";
 	}
@@ -178,4 +175,3 @@ public class SchedulerController {
 	public void notFound() {
 	}
 }
-// /

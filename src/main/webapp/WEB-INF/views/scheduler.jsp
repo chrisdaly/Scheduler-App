@@ -118,7 +118,7 @@ body>#container {
 			</div>
 
 			<br />
-			<form method="post" action="../todo/" align=center>
+			<form method="post" action="../myschedule/" align=center>
 				<input name="text" type="text" value=""
 					placeholder="Assignment#College"> <input name="create task"
 					class="btn btn-primary" type="submit" value="Create Task" />
@@ -138,13 +138,13 @@ body>#container {
 						</tr>
 					</thead>
 
-					<c:forEach items="${todos}" var="todo" varStatus="row">
+					<c:forEach items="${tasks}" var="task" varStatus="row">
 						<tbody>
 							<c:if test="condition"></c:if>
-							<td>${todo.tag}</td>
-							<td>${todo.text}</td>
+							<td>${task.tag}</td>
+							<td>${task.text}</td>
 							<td><c:choose>
-									<c:when test="${todo.done}">
+									<c:when test="${task.done}">
     								Yes
   								</c:when>
 									<c:otherwise>
@@ -153,7 +153,7 @@ body>#container {
 								</c:choose></td>
 
 							<td>
-								<form method="post" action="${todo.id}">
+								<form method="post" action="${task.id}">
 									<input name="_method" type="hidden" value="put"> <input
 										name="put" type="submit" value="Update"
 										class="btn btn-primary">
@@ -161,7 +161,7 @@ body>#container {
 							</td>
 
 							<td>
-								<form method="post" action="${todo.id}">
+								<form method="post" action="${task.id}">
 									<input name="_method" type="hidden" value="delete"> <input
 										name="delete" type="submit" value="Delete"
 										class="btn btn-danger">
@@ -171,12 +171,9 @@ body>#container {
 						</tbody>
 					</c:forEach>
 
-
 				</table>
 			</div>
-
 		</div>
-
 	</div>
 
 	<div id="footer">
